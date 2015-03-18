@@ -1,0 +1,143 @@
+@import "mediaqueries";
+
+$maxn: 12;
+$margin: 2%;
+
+.row {
+  display: block;
+  position: relative;
+  margin: 0px;
+  clear: both;
+  box-sizing: border-box;
+/*works in IE8+ !!*/
+[class*="span"] {
+  float: left;
+  box-sizing: border-box;
+/*works in IE8+ !!*/
+}
+
+&:before,
+&:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+&:after { 
+  clear: both;
+}
+}
+
+
+
+@mixin gridColumn($prefix,$marginpercent,$marginrem,$n,$max) {
+  .row>.#{$prefix}-span-#{$n} {
+    $truemargin: $marginpercent / (100% + $marginpercent);
+
+    $totalWidth: 100% - $max * $truemargin * 100%;
+    //$width: $n / $maxn * $totalWidth;
+
+    $basewidth: ($n / $max) * $totalWidth;
+
+    width: $basewidth + ($n - 1) * $truemargin * 100%;
+    
+
+    $thiswidth: ($n/$max)*100%;
+    width: calc(#{$thiswidth} - #{$marginrem});
+
+  }
+}
+
+@mixin gridOff($prefix,$marginpercent,$marginrem,$n,$max) {
+    .row>.#{$prefix}-off-#{$n} {
+    $truemargin: $marginpercent / (100% + $marginpercent);
+    $totalWidth: 100% - $max * $truemargin * 100%;
+    $basewidth: ($n / $max) * $totalWidth;
+
+    margin-left: $basewidth + $n * $truemargin * 100%;
+
+    $thiswidth: ($n/$max)*100%;
+    margin-left: calc(#{$thiswidth} + #{$marginrem});
+  }
+}
+
+@mixin gridMaker($prefix, $marginpercent,$marginrem, $max) {
+  .row {
+    left: -$marginpercent;
+    left:calc(-#{$marginrem});
+    width: 100%+$marginpercent;
+    width:calc(100% + #{$marginrem});
+  }
+
+    .border-bottom {
+    margin-bottom: $marginrem;
+    }
+
+
+  .row>[class*="span"] {
+    $truemargin: $marginpercent / (100% + $marginpercent); 
+    margin-left: $truemargin * 100%;
+    margin-left: calc(#{$marginrem});
+
+
+  }
+
+  .#{$prefix}-remove {
+    display: none !important;
+  }
+  .#{$prefix}-hide {
+    visibility: hidden;
+  }
+
+  @for $i from 1 through $max {
+  @include gridColumn($prefix, $marginpercent,$marginrem, $i, $max);
+}
+
+  @for $i from 1 to $max {
+    @include gridOff($prefix, $marginpercent,$marginrem, $i, $max);
+  }
+
+}
+
+$navsize: 5rem;
+
+.content {
+  //height:100%;
+  //margin-top:-$navsize;
+  box-sizing:border-box;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+ 
+@include breakpoint(mobile) {
+.content {
+  $w: 100%;
+  //margin-left:(100%-$w)/2;
+  //margin-right:(100%-$w)/2;
+  margin:none;
+  width:$w;
+  padding:2rem;}
+
+  @include gridMaker("m",2.5%,1rem,4);
+}
+
+@include breakpoint(tablet) {
+.content {
+  $w: 90%;
+  //margin-left:(100%-$w)/2;
+  //margin-right:(100%-$w)/2;
+  width:$w;
+  padding:2rem;
+}
+
+  @include gridMaker("t",2.5%,1rem,8); 
+}
+
+
+@include breakpoint(big) {
+  .content {
+  $w: 80%;
+  width:$w;
+  padding:3rem;}
+  @include gridMaker("n",2.5%,2.5rem,12);
+}

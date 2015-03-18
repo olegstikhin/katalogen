@@ -1,0 +1,14 @@
+@mixin breakpoint($query) {
+	@if $query == mobile {
+		@media only screen and (min-width:120px) and (max-width:480px) { @content; }
+	} @else if $query == tablet {
+		@media only screen and (min-width:481px) and (max-width:900px) { @content; }
+
+	} @else if $query == normal {
+		@media only screen and (min-width:901px) { @content; }
+	} @else if $query == small {
+		@media only screen and (min-width:120px) and (max-width:900px){ @content; }
+	} @else if $query == big {
+		@media only screen and (min-width:481px){ @content; }
+	}
+}
