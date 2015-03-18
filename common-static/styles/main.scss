@@ -1,0 +1,176 @@
+@import "mediaqueries";
+
+$black1: lighten(black, 6%);
+$black2: lighten(black, 12%);
+
+$line_height: 1.4;
+
+$green_color1: rgb(83, 207, 41);
+
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700,300);
+
+* {
+	box-sizing:border-box;
+	margin: 0;
+}
+
+body, html {
+	width:100%;
+    height:100%;
+	padding:0;
+    font-size: 10px;
+    letter-spacing: normal;
+}
+
+@import url(//fonts.googleapis.com/css?family=Open+Sans:600,400,300);
+@import url(//fonts.googleapis.com/css?family=Lato:400,300,100,400italic,700);
+
+/*Open Sans font by Steve Matteson, Apache 2.0 License: http://www.apache.org/licenses/LICENSE-2.0.html*/
+
+body {
+    font-size: 1.4rem;
+	line-height:$line_height;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+input {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif !important;
+}
+
+$input_huge: 2;
+$input_bigger: 1.25;
+input[type="text"] {
+	background-color: invert($black1);
+	border:1px solid darken(white, 30%);
+
+	$pad_hz: 0.75rem;
+	$pad_vr: 0.5rem;
+	$font_sz: 1.2rem;
+
+	padding: $pad_vr $pad_hz;
+	font-size: $font_sz;
+	line-height: $line_height;
+	height: 2 * $pad_vr + $font_sz * $line_height;
+
+	&.bigger {
+		padding: $pad_vr*$input_bigger $pad_hz*$input_bigger;
+		font-size: $font_sz*$input_bigger;
+		line-height: $line_height;
+		height: 2 * $pad_vr * $input_bigger + $font_sz * $input_bigger * $line_height;
+	}
+
+	&.huge {
+		padding: $pad_vr*$input_huge $pad_hz*$input_huge;
+		font-size: $font_sz*$input_huge;
+		line-height: $line_height;
+		height: 2 * $pad_vr * $input_huge + $font_sz * $input_huge * $line_height;
+	}
+
+} 
+
+strong {
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none !important;
+    font-weight: 400;
+    color:darken(#6699FF,45%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato',Helvetica,Sans-serif;
+    font-weight: 300;
+    margin: 0;
+    line-height:$line_height;
+    color: $black2;
+    &.light {
+        color: lighten(invert($black2),7%);
+    }
+}
+
+h1 {
+    font-size: 12rem;
+    color: $black1;
+    &.light {
+        color: invert($black1);
+    }
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2.6rem;
+}
+
+h4 {
+    font-size: 2.4rem;
+}
+
+h5 {
+    font-size: 2.2rem;
+}
+
+h6 {
+    font-size: 2rem;
+}
+
+p {
+    font-family: 'Open Sans',Helvetica,Sans-serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: $line_height;
+}
+
+li {
+    list-style:none;
+}
+
+.light {
+    color: darken(white, 6%);
+}
+
+.grey {
+    color: lighten(black, 60%);
+}
+
+.small {
+    font-size: 0.75em;
+}
+.large {
+    font-size: 1.25em;
+}
+
+.left {
+    float:left;
+}
+
+.right {
+    float:right;
+}
+
+.table {
+    padding:1rem;
+}
+
+hr {
+    margin: 2rem 0;
+	border-color:lighten(black,95%);
+    &.dark {
+        border-color:lighten(black,55%);
+    }
+}
+
+.pad1 {
+    padding: 0.75rem 1rem;
+}
+
+.pad2 {
+    padding:1.5rem 2.25rem;
+}
+
+.nopad {
+    padding: 0 !important;     
+}
