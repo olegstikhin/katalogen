@@ -1,0 +1,22 @@
+.center-parent {
+  width: 100%;
+  height: 90%; }
+
+#content {
+  width: 44%; }
+
+h1 {
+  font-size: 7vw;
+  text-align: center;
+  color: #53cf29;
+  background: -webkit-linear-gradient(#53cf29, #317a18);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.1); }
+
+p {
+  margin-bottom: 2rem; }
+
+input {
+  width: 80%;
+  margin: 0 10%; }

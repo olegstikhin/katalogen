@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^update/$', import_db),
 
+    url(r'^$', 'login_app.views.index', name='login_home'),
 )
