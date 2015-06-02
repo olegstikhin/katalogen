@@ -11,13 +11,14 @@
 <div class="center-parent">	
 	<div id="content" class="center-child pad2">
 		<h1>KATALOGEN</h1>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<input class="huge" type="text" name="main_input" id="main_input" />
+		<p>För att logga in till Katalogen behöver du vara Teknologföreningens medlem och din e-postadress måste finnas i medlemsregistret. Vänligen skriv in din e-postadress för att fortsätta:</p>
+		<form action="/login/" method="post">
+            {% csrf_token %}
+            <input class="huge" type="text" name="main_input" id="main_input" />
+            <input type="submit" value="Skicka">
+        </form>
+
+        <p>Ifall din adress saknas från medlemsregistret, kontakta <a href="mailto:sekreterare@teknolog.fi">sekreterare@teknolog.fi</a></p>.
 	</div>
 </div>
 {% endblock %}

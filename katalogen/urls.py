@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^update/$', import_db),
 
     url(r'^$', 'login_app.views.index', name='login_home'),
+    url(r'^login/$', 'login_app.views.login_attempt', name='login_attempt'),
 )

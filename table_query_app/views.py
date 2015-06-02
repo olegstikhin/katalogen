@@ -25,4 +25,10 @@ def import_db(request):
             tmp.dead = line[23]
             tmp.no_publish = line[25]
             tmp.username = line[26]
+            tmp.address = line[36]
+            tmp.postcode = line[37]
+            tmp.city = line[38]
+            tmp.phone = line[40]
+            tmp.mobile_phone = line[41]
+            tmp.email = line[44]
             tmp.save()
