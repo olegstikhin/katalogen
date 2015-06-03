@@ -10,7 +10,7 @@ def import_db(request):
 
     for line in reader:
         if line:
-            tmp = Members.objects.create()
+            tmp = Member.objects.create()
             tmp.member_type = line[2]
             tmp.given_names = line[9]
             tmp.preferred_name = line[10]

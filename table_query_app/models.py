@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Members(models.Model):
+class Member(models.Model):
     member_type = models.CharField(max_length=200)
     given_names = models.CharField(max_length=200)
     preferred_name = models.CharField(max_length=200)

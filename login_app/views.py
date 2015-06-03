@@ -26,8 +26,9 @@ def login_attempt(request):
         except forms.ValidationError:
             return HttpResponse("Din e-postadress är inte giltig, vänligen försök på nytt")
         try:
-            table_query_app.models.Members.objects.filter(email=email).get()
-        except table_query_app.models.Members.DoesNotExist:
+            member = table_query_app.models.Member.objects.filter(email=email).get()
+
+        except table_query_app.models.Member.DoesNotExist:
             return HttpResponse("Adressen finns inte i medlemsregistret.")
     # Registration successful, send mail here
     return HttpResponse("Din registrering har lyckats!")
