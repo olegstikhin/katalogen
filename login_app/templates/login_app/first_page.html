@@ -11,14 +11,30 @@
 <div class="center-parent">	
 	<div id="content" class="center-child pad2">
 		<h1>KATALOGEN</h1>
-		<p>För att logga in till Katalogen behöver du vara Teknologföreningens medlem och din e-postadress måste finnas i medlemsregistret. Vänligen skriv in din e-postadress för att fortsätta:</p>
-		<form action="/login/" method="post">
-            {% csrf_token %}
-            <input class="huge" type="text" name="main_input" id="main_input" />
-            <input type="submit" value="Skicka">
-        </form>
+        {% if user.is_authenticated %}
+            Hej <strong>{{ name }}</strong>! <a href="/logout/">Logga ut</a>
+            <h2>Ordinarie medlemmar</h2>
+            <table>
+            {% for o in ordinarie %}
+                <tr><td><p>{{ o.preferred_name }} {{ o.surname }}</p></td><td>{{ o.address }}</td><td>{{ o.postcode }}</td><td>{{ o.city }}</td><td>{{ o.mobile_phone }}</td><td><a href="mailto:{{ o.email }}">{{ o.email }}</a></td></tr>
+            {% endfor %}
+            </table>
+            <h2>StÄlMar</h2>
+            <table>
+            {% for s in stalmar %}
+                <tr><td><p>{{ s.preferred_name }} {{ s.surname }}</p></td><td>{{ s.address }}</td><td>{{ s.postcode }}</td><td>{{ s.city }}</td><td>{{ s.mobile_phone }}</td><td><a href="mailto:{{ s.email }}">{{ s.email }}</a></td></tr>
+            {% endfor %}
+            </table>
+        {% else %}
+            <p>För att logga in till Katalogen behöver du vara Teknologföreningens medlem och din e-postadress måste finnas i medlemsregistret. Vänligen skriv in din e-postadress för att fortsätta:</p>
+            <form action="/login/" method="post">
+                {% csrf_token %}
+                <input class="huge" type="text" name="main_input" id="main_input" />
+                <input type="submit" value="Skicka">
+            </form>
 
-        <p>Ifall din adress saknas från medlemsregistret, kontakta <a href="mailto:sekreterare@teknolog.fi">sekreterare@teknolog.fi</a>.x§</p>
+            <p>Ifall din adress saknas från medlemsregistret, kontakta <a href="mailto:sekreterare@teknolog.fi">sekreterare@teknolog.fi</a>.x§</p>
+        {% endif %}
 	</div>
 </div>
 {% endblock %}

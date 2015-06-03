@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from table_query_app.models import *
 import csv
 
@@ -32,3 +33,5 @@ def import_db(request):
             tmp.mobile_phone = line[41]
             tmp.email = line[44]
             tmp.save()
+
+    return HttpResponse("Färdigt")
