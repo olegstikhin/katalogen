@@ -14,4 +14,5 @@ urlpatterns = patterns('',
     url(r'^auth/$', 'login_app.views.login_from_link', name='login_from_link'),
     url(r'^login/$', 'login_app.views.login_attempt', name='login_attempt'),
     url(r'^logout/$', 'login_app.views.logout_user', name='logout_user'),
+    url(r'^search/', 'homeview_app.views.search', name='search'),
 )
