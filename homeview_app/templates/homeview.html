@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block css_files %}
+<link href="{% static 'styles/homeview_app.css' %}" rel="stylesheet" >
+{% endblock %}
+
+{% block title %}Katalogen{% endblock %}
+
+        <script>
+        </script>
+{% block content %}
+<div class="center-parent">	
+	<div id="content" class="member_list pad2">
+        {% if user.is_authenticated %}
+            <div class="columns">
+                <div class="column_logo"><a href="/"><img src="{{ STATIC_URL }}katalogen14_logo_text.png" width="250px"/></a></div>
+                <div class="column_search">Sök</div>
+                <div class="column_logout">
+                Hej <strong>{{ name }}</strong>! <a href="/logout/">Logga ut</a>
+                </div>
+            </div>
+            <table>
+            <tr><td colspan="4" class="list_header">Ordinarie medlemmar</td></tr>
+            {% for o in ordinarie %}
+                <tr><td>{{ o.preferred_name }} {{ o.surname }}</td><td>{{ o.address }}<br/>{{ o.postcode }} {{ o.city }}</td><td>{{ o.mobile_phone }}</td><td><a href="mailto:{{ o.email }}">{{ o.email }}</a></td></tr>
+            {% endfor %}
+            <tr><td colspan="4" class="list_header">StÄlMar</td></tr>
+            {% for s in stalmar %}
+                <tr><td>{{ s.preferred_name }} {{ s.surname }}</td><td>{{ s.address }}<br/>{{ s.postcode }} {{ s.city }}</td><td>{{ s.mobile_phone }}</td><td><a href="mailto:{{ s.email }}">{{ s.email }}</a></td></tr>
+            {% endfor %}
+            </table>
+        {% else %}
+            <div class="logo"></div>
+            <p><strong>Fel:</strong> Du måste <a href="/">logga in</a> först.</p>
+        {% endif %}
+	</div>
+    <div class="ad">
+        <p class="ad_header">i samarbete med</p>
+        <a href="https://www.teknologforeningen.fi"><img src="{{ STATIC_URL }}tf_logo.png" width="75px"/></a>
+    </div>
+</div>
+{% endblock %}

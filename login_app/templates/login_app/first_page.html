@@ -2,42 +2,46 @@
 {% load staticfiles %}
 {% block css_files %}
 <link href="{% static 'styles/login_app.css' %}" rel="stylesheet" >
+<script src="{% static 'scripts.js' %}"></script>
 {% endblock %}
 
 {% block title %}Katalogen{% endblock %}
 
-
+        <script>
+        </script>
 {% block content %}
 <div class="center-parent">	
 	<div id="content" class="center-child pad2">
 		<div class="logo"></div>
         {% if user.is_authenticated %}
-            Hej <strong>{{ name }}</strong>! <a href="/logout/">Logga ut</a>
-            <h2>Ordinarie medlemmar</h2>
-            <table>
-            {% for o in ordinarie %}
-                <tr><td><p>{{ o.preferred_name }} {{ o.surname }}</p></td><td>{{ o.address }}</td><td>{{ o.postcode }}</td><td>{{ o.city }}</td><td>{{ o.mobile_phone }}</td><td><a href="mailto:{{ o.email }}">{{ o.email }}</a></td></tr>
-            {% endfor %}
-            </table>
-            <h2>StÄlMar</h2>
-            <table>
-            {% for s in stalmar %}
-                <tr><td><p>{{ s.preferred_name }} {{ s.surname }}</p></td><td>{{ s.address }}</td><td>{{ s.postcode }}</td><td>{{ s.city }}</td><td>{{ s.mobile_phone }}</td><td><a href="mailto:{{ s.email }}">{{ s.email }}</a></td></tr>
-            {% endfor %}
-            </table>
+            <p>Hej <strong>{{ name }}</strong>! <a href="/logout/">Logga ut</a></p>
+            <p><a href="/medlemmar/">Medlemsregistret</a></p>
         {% else %}
-            <p>För att logga in till Katalogen behöver du vara Teknologföreningens medlem och din e-postadress måste finnas i medlemsregistret. Vänligen skriv in din e-postadress för att fortsätta:</p>
-            <form action="/login/" method="post">
-                {% csrf_token %}
-                <input class="login" type="text" name="main_input" id="main_input" />
-                <input type="submit" value="Skicka">
-            </form>
+            <div id="login_text">
+                <p>För att logga in till Katalogen behöver du vara Teknologföreningens medlem och din e-postadress måste finnas i medlemsregistret. Vänligen skriv in din e-postadress för att fortsätta:</p>
+                <form id="login_form" action="" method="post">
+                    {% csrf_token %}
+                    <input class="login" type="text" name="main_input" id="main_input" />
+                    <input type="submit" value="Skicka">
+                </form>
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-            <p>Ifall din adress saknas från medlemsregistret, kontakta <a href="mailto:sekreterare@teknolog.fi">sekreterare@teknolog.fi</a>.</p>
+                <script>
+                $('#login_form').submit(function(e){
+                    $('#login_text').html("<p>Ett ögonblick...</p>");
+                    $.post('/login/', $(this).serialize(), function(data){
+                       $('#login_text').html(data);
+                    });
+                e.preventDefault();
+            });
+
+                </script>
+                <p>Ifall din adress saknas från medlemsregistret, kontakta <a href="mailto:sekreterare@teknolog.fi">sekreterare@teknolog.fi</a>.</p>
+            </div>
         {% endif %}
 	</div>
     <div class="ad">
-        <p class="ad_header">Katalogen.fi i samarbete med</p>
+        <p class="ad_header">i samarbete med</p>
         <a href="https://www.teknologforeningen.fi"><img src="{{ STATIC_URL }}tf_logo.png" width="75px"/></a>
     </div>
 </div>

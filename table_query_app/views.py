@@ -32,6 +32,9 @@ def import_db(request):
             tmp.phone = line[40]
             tmp.mobile_phone = line[41]
             tmp.email = line[44]
+            tmp.groups = line[45]
+            tmp.posts = line[46]
+            tmp.membership = line[47]
             tmp.save()
 
     return HttpResponse("Färdigt")

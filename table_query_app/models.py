@@ -21,4 +21,7 @@ class Member(models.Model):
     city = models.CharField(max_length=500)
     phone = models.CharField(max_length=100)
     mobile_phone = models.CharField(max_length=100)
+    groups = models.TextField()
+    posts = models.TextField()
+    membership = models.TextField()
     email = models.EmailField()

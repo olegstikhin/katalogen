@@ -25,3 +25,14 @@ def search(request):
     members = Member.objects.filter(name__icontains=query)
     return JsonResponse("search.html", {'query': query, 'members': members, }, context_instance=RequestContext(request))
 
+
+def get_members(request):
+    if request.user.is_authenticated():
+        profile = UserProfile.objects.filter(user_id=request.user.id).get()
+        member = table_query_app.models.Member.objects.filter(pk=profile.member_id).get()
+        name = member.preferred_name + " " + member.surname
+        ordinarie = table_query_app.models.Member.objects.filter(member_type__contains='Ordinarie medlem').order_by('surname')
+        stalmar = table_query_app.models.Member.objects.filter(member_type__contains='StÄlM').exclude(member_type__contains='JuniorStÄlM').order_by('surname')
+        return render_to_response("homeview.html", {'name': name, 'ordinarie': ordinarie, 'stalmar': stalmar, }, context_instance=RequestContext(request))
+    else:
+        return render_to_response("homeview.html", {}, context_instance=RequestContext(request))
