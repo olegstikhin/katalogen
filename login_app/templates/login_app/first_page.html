@@ -10,7 +10,7 @@
 {% block content %}
 <div class="center-parent">	
 	<div id="content" class="center-child pad2">
-		<h1>KATALOGEN</h1>
+		<div class="logo"></div>
         {% if user.is_authenticated %}
             Hej <strong>{{ name }}</strong>! <a href="/logout/">Logga ut</a>
             <h2>Ordinarie medlemmar</h2>
@@ -29,12 +29,16 @@
             <p>För att logga in till Katalogen behöver du vara Teknologföreningens medlem och din e-postadress måste finnas i medlemsregistret. Vänligen skriv in din e-postadress för att fortsätta:</p>
             <form action="/login/" method="post">
                 {% csrf_token %}
-                <input class="huge" type="text" name="main_input" id="main_input" />
+                <input class="login" type="text" name="main_input" id="main_input" />
                 <input type="submit" value="Skicka">
             </form>
 
-            <p>Ifall din adress saknas från medlemsregistret, kontakta <a href="mailto:sekreterare@teknolog.fi">sekreterare@teknolog.fi</a>.x§</p>
+            <p>Ifall din adress saknas från medlemsregistret, kontakta <a href="mailto:sekreterare@teknolog.fi">sekreterare@teknolog.fi</a>.</p>
         {% endif %}
 	</div>
+    <div class="ad">
+        <p class="ad_header">Katalogen.fi i samarbete med</p>
+        <a href="https://www.teknologforeningen.fi"><img src="{{ STATIC_URL }}tf_logo.png" width="75px"/></a>
+    </div>
 </div>
 {% endblock %}

@@ -17,6 +17,58 @@ h1 {
 p {
   margin-bottom: 2rem; }
 
-input {
-  width: 80%;
-  margin: 0 10%; }
+
+
+body {
+  padding-top: 20px;
+}
+
+.center-child {
+  box-sizing: border-box;
+  color: white;
+  width: 70%;
+  margin: auto;
+  padding-left: 5%;
+  padding-right: 5%;
+  max-width: calc(100% - 30px);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.logo {
+  margin: auto;
+  background:url(../katalogen14_logo_text.png) no-repeat center center;
+  background-size: contain;
+  height: 150px;
+}
+
+input[type="text"].login {
+  padding: 1rem 1.5rem;
+  font-size: 2.4rem;
+  line-height: 1.4;
+  height: 5.36rem;
+  width: 100%;
+}
+
+input[type="submit"] {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid #8c8c8c;
+  margin-top: 7px;
+  margin-bottom: 20px;
+  padding: 10px;
+  color: #fff;
+  width: 100%;
+  font-size: smaller;
+  text-transform: uppercase;
+}
+
+.ad {
+  margin: auto;
+  width: 40%;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.ad_header {
+  font-size: smaller;
+  text-transform: uppercase;
+}

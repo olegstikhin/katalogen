@@ -6,12 +6,18 @@
   box-sizing: border-box;
   margin: 0; }
 
+{% load staticfiles %}
+
 body, html {
   width: 100%;
   height: 100%;
   padding: 0;
   font-size: 10px;
-  letter-spacing: normal; }
+  letter-spacing: normal;
+  background: black url(../dark_embroidery.png) repeat 0 0;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  color: #fff;
+}
 
 /*Open Sans font by Steve Matteson, Apache 2.0 License: http://www.apache.org/licenses/LICENSE-2.0.html*/
 body {
@@ -23,9 +29,10 @@ input {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif !important; }
 
 input[type="text"] {
-  background-color: #f0f0f0;
-  border: 1px solid #b3b3b3;
-  padding: 0.5rem 0.75rem;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid #8c8c8c;
+  color: #fff;
+  /* padding: 0.5rem 0.75rem; */
   font-size: 1.2rem;
   line-height: 1.4;
   height: 2.68rem; }
@@ -46,7 +53,7 @@ strong {
 a {
   text-decoration: none !important;
   font-weight: 400;
-  color: #002a7f; }
+  color: #b3b3b3; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat',Helvetica,Sans-serif;
