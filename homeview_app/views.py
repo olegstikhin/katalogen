@@ -22,17 +22,21 @@ import table_query_app
 
 def search(request):
     query = request.GET.get('q', '')
-    members = Member.objects.filter(name__icontains=query)
+    members = Membertable.objects.filter(name__icontains=query)
     return JsonResponse("search.html", {'query': query, 'members': members, }, context_instance=RequestContext(request))
 
 
 def get_members(request):
     if request.user.is_authenticated():
-        profile = UserProfile.objects.filter(user_id=request.user.id).get()
-        member = table_query_app.models.Member.objects.filter(pk=profile.member_id).get()
-        name = member.preferred_name + " " + member.surname
-        ordinarie = table_query_app.models.Member.objects.filter(member_type__contains='Ordinarie medlem').order_by('surname')
-        stalmar = table_query_app.models.Member.objects.filter(member_type__contains='StÄlM').exclude(member_type__contains='JuniorStÄlM').order_by('surname')
+        member = table_query_app.models.Contactinformationtable.objects.get(email_fld=request.user.username).member_fld
+        #profile = UserProfile.objects.filter(user_id=request.user.id).get()
+        #member = table_query_app.models.Membertable.objects.filter(pk=profile.member_id).get()
+        name = member.preferredname_fld + " " + member.surname_fld
+        # ordinarie = table_query_app.models.Membertable.objects.order_by('surname_fld')
+        ordinarie_id = table_query_app.models.Membershiptable.objects.filter(membershiptype_fld="00000000000000000000000000000002").filter(endtime_fld__isnull=True).values_list('member_fld', flat=True)
+        ordinarie = table_query_app.models.Contactinformationtable.objects.filter(member_fld__in=ordinarie_id).select_related().order_by('member_fld__surname_fld')
+        stalmar_id = table_query_app.models.Membershiptable.objects.filter(membershiptype_fld="00000000000000000000000000000005").values_list('member_fld', flat=True)
+        stalmar = table_query_app.models.Contactinformationtable.objects.filter(member_fld__in=stalmar_id).select_related().order_by('member_fld__surname_fld')
         return render_to_response("homeview.html", {'name': name, 'ordinarie': ordinarie, 'stalmar': stalmar, }, context_instance=RequestContext(request))
     else:
         return render_to_response("homeview.html", {}, context_instance=RequestContext(request))

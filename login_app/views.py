@@ -7,6 +7,7 @@ from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.shortcuts import render_to_response, get_object_or_404, render, redirect
 from django.template import RequestContext
@@ -23,9 +24,10 @@ import table_query_app
 
 def index(request):
     if request.user.is_authenticated():
-        profile = UserProfile.objects.filter(user_id=request.user.id).get()
-        member = table_query_app.models.Member.objects.filter(pk=profile.member_id).get()
-        name = member.preferred_name + " " + member.surname
+        member = table_query_app.models.Contactinformationtable.objects.get(email_fld=request.user.username).member_fld
+        #profile = UserProfile.objects.filter(user_id=request.user.id).get()
+        #member = table_query_app.models.Member.objects.filter(pk=profile.member_id).get()
+        name = member.preferredname_fld + " " + member.surname_fld
         return render_to_response("login_app/first_page.html", {'name': name, }, context_instance=RequestContext(request))
     else:
         return render_to_response("login_app/first_page.html", {}, context_instance=RequestContext(request))
@@ -39,7 +41,7 @@ def login_attempt(request):
         except forms.ValidationError:
             return HttpResponse("<p>Din e-postadress är inte giltig, vänligen försök på nytt</p><p><a href='./'>Tillbaka</a></p>")
         try:
-            member = table_query_app.models.Member.objects.filter(email=email).get()
+            member = table_query_app.models.Contactinformationtable.objects.get(email_fld=email).member_fld
             pw = id_generator()
             if User.objects.filter(username=email).exists():
                 existing_user = get_object_or_404(User, username=email)
@@ -48,14 +50,14 @@ def login_attempt(request):
             else:
                 new_user = User.objects.create_user(email, email, pw)
                 new_user.save()
-                new_profile = UserProfile(user=new_user, member=member)
-                new_profile.save()
-            title = "Lösenord till katalogen.fi"
-            content = "Hej " + member.preferred_name + " " + member.surname + ",\nFör att logga in till Katalogen följ länken: http://localhost:8000/auth?email=" + email + "&key=" + pw
-            send_mail(title, content, '', [email], fail_silently=False)
-            return HttpResponse("<p>Hej " + member.preferred_name + " " + member.surname + "!<br/>Din registrering har lyckats! Din inloggningslänk skickades till <strong>"+email+"</strong>.</p>")
+            subject, sender, recipient = 'Lösenord till katalogen.fi', 'Katalogen <katalogen@teknologforeningen.fi>', email
 
-        except table_query_app.models.Member.DoesNotExist:
+            content = "Hej " + member.preferredname_fld + " " + member.surname_fld + ",\nFör att logga in till Katalogen följ länken: http://localhost:8000/auth?email=" + email + "&key=" + pw
+            send_mail(subject, content, sender, [email], fail_silently=False)
+
+            return HttpResponse("<p>Hej " + member.preferredname_fld + " " + member.surname_fld + "!<br/>Din registrering har lyckats! Din inloggningslänk skickades till <strong>"+email+"</strong>.</p>")
+
+        except table_query_app.models.Contactinformationtable.DoesNotExist:
             return HttpResponse("<p>Adressen finns inte i medlemsregistret.</p><p><a href='./'>Tillbaka</a></p>")
     return HttpResponse("<p>Fel</p>")
 

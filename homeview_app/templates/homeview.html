@@ -22,11 +22,11 @@
             <table>
             <tr><td colspan="4" class="list_header">Ordinarie medlemmar</td></tr>
             {% for o in ordinarie %}
-                <tr><td>{{ o.preferred_name }} {{ o.surname }}</td><td>{{ o.address }}<br/>{{ o.postcode }} {{ o.city }}</td><td>{{ o.mobile_phone }}</td><td><a href="mailto:{{ o.email }}">{{ o.email }}</a></td></tr>
+                <tr><td>{{ o.member_fld.preferredname_fld }} {{ o.member_fld.surname_fld }}</td><td>{{ o.streetaddress_fld }}<br/>{{ o.postalcode_fld }} {{ o.city_fld }}</td><td>{% firstof o.cellphone_fld o.phone_fld %}</td><td><a href="mailto:{{ o.email_fld }}">{{ o.email_fld }}</a></td></tr>
             {% endfor %}
             <tr><td colspan="4" class="list_header">StÄlMar</td></tr>
-            {% for s in stalmar %}
-                <tr><td>{{ s.preferred_name }} {{ s.surname }}</td><td>{{ s.address }}<br/>{{ s.postcode }} {{ s.city }}</td><td>{{ s.mobile_phone }}</td><td><a href="mailto:{{ s.email }}">{{ s.email }}</a></td></tr>
+            {% for o in stalmar %}
+                <tr><td>{{ o.member_fld.preferredname_fld }} {{ o.member_fld.surname_fld }}</td><td>{{ o.streetaddress_fld }}<br/>{{ o.postalcode_fld }} {{ o.city_fld }}</td><td>{% firstof o.cellphone_fld o.phone_fld %}</td><td><a href="mailto:{{ o.email_fld }}">{{ o.email_fld }}</a></td></tr>
             {% endfor %}
             </table>
         {% else %}
