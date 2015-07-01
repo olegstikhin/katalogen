@@ -34,9 +34,9 @@ def get_members(request):
         name = member.preferredname_fld + " " + member.surname_fld
         # ordinarie = table_query_app.models.Membertable.objects.order_by('surname_fld')
         ordinarie_id = table_query_app.models.Membershiptable.objects.filter(membershiptype_fld="00000000000000000000000000000002").filter(endtime_fld__isnull=True).values_list('member_fld', flat=True)
-        ordinarie = table_query_app.models.Contactinformationtable.objects.filter(member_fld__in=ordinarie_id).select_related().order_by('member_fld__surname_fld')
+        ordinarie = table_query_app.models.Contactinformationtable.objects.filter(member_fld__in=ordinarie_id).select_related().filter(member_fld__dead_fld=0).filter(member_fld__nopublishcontactinfo_fld=0).order_by('member_fld__surname_fld')
         stalmar_id = table_query_app.models.Membershiptable.objects.filter(membershiptype_fld="00000000000000000000000000000005").values_list('member_fld', flat=True)
-        stalmar = table_query_app.models.Contactinformationtable.objects.filter(member_fld__in=stalmar_id).select_related().order_by('member_fld__surname_fld')
+        stalmar = table_query_app.models.Contactinformationtable.objects.filter(member_fld__in=stalmar_id).select_related().filter(member_fld__dead_fld=0).filter(member_fld__nopublishcontactinfo_fld=0).order_by('member_fld__surname_fld')
         return render_to_response("homeview.html", {'name': name, 'ordinarie': ordinarie, 'stalmar': stalmar, }, context_instance=RequestContext(request))
     else:
         return render_to_response("homeview.html", {}, context_instance=RequestContext(request))
