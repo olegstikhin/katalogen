@@ -142,3 +142,8 @@ hr {
   font-size: smaller;
   text-transform: uppercase;
 }
+
+.ad_footer {
+  margin-top: 15px;
+  font-size: smaller;
+}

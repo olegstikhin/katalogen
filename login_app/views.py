@@ -52,7 +52,7 @@ def login_attempt(request):
                 new_user.save()
             subject, sender, recipient = 'Lösenord till katalogen.fi', 'Katalogen <katalogen@teknologforeningen.fi>', email
 
-            content = "Hej " + member.preferredname_fld + " " + member.surname_fld + ",\nFör att logga in till Katalogen följ länken: http://localhost:8000/auth?email=" + email + "&key=" + pw
+            content = "Hej " + member.preferredname_fld + " " + member.surname_fld + ",\nFör att logga in till Katalogen följ länken: https://katalogen.teknologforeningen.fi/auth?email=" + email + "&key=" + pw
             send_mail(subject, content, sender, [email], fail_silently=False)
 
             return HttpResponse("<p>Hej " + member.preferredname_fld + " " + member.surname_fld + "!<br/>Din registrering har lyckats! Din inloggningslänk skickades till <strong>"+email+"</strong>.</p>")

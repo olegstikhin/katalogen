@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^update/$', import_db),
+    #url(r'^update/$', import_db),
 
     url(r'^$', 'login_app.views.index', name='login_home'),
     url(r'^medlemmar/$', 'homeview_app.views.get_members', name='members'),
