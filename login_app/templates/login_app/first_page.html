@@ -18,6 +18,7 @@
             <p><a href="/medlemmar/">Medlemsregistret</a></p>
         {% else %}
             <div id="login_text">
+		<p><strong>Obs:</strong> Katalogen.fi är ännu i betaversion. Feedback kan riktas till <a href="mailto:sekreterare@teknolog.fi">sekreterare@teknolog.fi</a>.</p>
                 <p>För att logga in till Katalogen behöver du vara Teknologföreningens medlem och din e-postadress måste finnas i medlemsregistret. Vänligen skriv in din e-postadress för att fortsätta:</p>
                 <form id="login_form" action="" method="post">
                     {% csrf_token %}
