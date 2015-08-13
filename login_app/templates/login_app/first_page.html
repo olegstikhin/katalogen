@@ -12,7 +12,7 @@
 {% block content %}
 <div class="center-parent">	
 	<div id="content" class="center-child pad2">
-		<div class="logo"></div>
+        <img class="logo" src="{{ STATIC_URL }}katalogen14_logo_text.png" />
         {% if user.is_authenticated %}
             <p>Hej <strong>{{ name }}</strong>! <a href="/logout/">Logga ut</a></p>
             <p><a href="/medlemmar/">Medlemsregistret</a></p>
