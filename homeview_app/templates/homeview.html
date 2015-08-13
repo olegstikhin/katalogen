@@ -6,9 +6,24 @@
 
 {% block title %}Katalogen{% endblock %}
 
-        <script>
-        </script>
 {% block content %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.member').click(function (event) {
+            var old = $('.member_open').parent()
+            old.load("/namn?id="+old.attr('id'));
+            $(this).load("/medlem?id="+$(this).attr('id'))
+            $('html, body').animate({
+                scrollTop: $(this).offset().top - (($(window).height() / 2) - ($(this).height()))
+                //scrollTop: $(this).offset().top
+            }, 1000);
+        });
+
+    });
+
+</script>
 <div class="center-parent">	
 	<div id="content" class="member_list pad2">
         {% if user.is_authenticated %}
@@ -20,13 +35,13 @@
                 </div>
             </div>
             <table>
-            <tr><td colspan="4" class="list_header">Ordinarie medlemmar</td></tr>
+            <tr><td colspan="1" class="list_header">Ordinarie medlemmar</td></tr>
             {% for o in ordinarie %}
-                <tr><td>{{ o.member_fld.preferredname_fld }} {{ o.member_fld.surname_fld }}</td><td>{{ o.streetaddress_fld }}<br/>{{ o.postalcode_fld }} {{ o.city_fld }}</td><td>{% firstof o.cellphone_fld o.phone_fld %}</td><td><a href="mailto:{{ o.email_fld }}">{{ o.email_fld }}</a></td></tr>
+                <tr><td class="member" id="{{ o.pk }}"><a href="#">{{ o.member_fld.preferredname_fld }} {{ o.member_fld.surname_fld }}</a></td></tr>
             {% endfor %}
-            <tr><td colspan="4" class="list_header">StÄlMar</td></tr>
+            <tr><td colspan="1" class="list_header">StÄlMar</td></tr>
             {% for o in stalmar %}
-                <tr><td>{{ o.member_fld.preferredname_fld }} {{ o.member_fld.surname_fld }}</td><td>{{ o.streetaddress_fld }}<br/>{{ o.postalcode_fld }} {{ o.city_fld }}</td><td>{% firstof o.cellphone_fld o.phone_fld %}</td><td><a href="mailto:{{ o.email_fld }}">{{ o.email_fld }}</a></td></tr>
+                <tr><td class="member" id="{{ o.pk }}"><a href="#">{{ o.member_fld.preferredname_fld }} {{ o.member_fld.surname_fld }}</a></td></tr>
             {% endfor %}
             </table>
         {% else %}
